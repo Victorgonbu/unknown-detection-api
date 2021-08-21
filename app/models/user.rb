@@ -5,7 +5,8 @@ class User < ApplicationRecord
     validates :name, :email, :password, :password_confirmation, presence: true
     validates :password, confirmation: true
     validates :email, format: { with: REGEX, message: "Invalid email"}
-    validates :name, :email, :password_confirmation, length: { in: 6..20 }
+    validates :name, length: { in: 6..20 }
+    validates :email, :password, length: { minimum: 8 }
     validates :email, uniqueness: true
 
     def password
