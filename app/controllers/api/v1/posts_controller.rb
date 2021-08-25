@@ -1,4 +1,4 @@
-class Api::V1::PostController < ApiController
+class Api::V1::PostsController < ApiController
     before_action :set_post
 
     def show 

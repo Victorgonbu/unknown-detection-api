@@ -8,6 +8,8 @@ class User < ApplicationRecord
     validates :name, length: { in: 6..20 }
     validates :email, :password, length: { minimum: 8 }
     validates :email, uniqueness: true
+    has_many :favorites
+    has_many :posts, through: :favorites
 
     def password
       @password ||= Password.new(password_hash)
