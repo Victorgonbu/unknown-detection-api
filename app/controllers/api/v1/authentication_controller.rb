@@ -3,11 +3,13 @@ class Api::V1::AuthenticationController < ApiController
     def create
         user = User.find_by(email: params[:user][:email])
         
-        if user.password == params[:user][:password]
-            render json: { name: user.name, token: JsonWebToken.encode(sub: user.id) }, status: 200
+        if user && user.password == params[:user][:password]
+            render json: { name: user.name,
+                email: user.email,
+                token: JsonWebToken.encode(sub: user.id) }, status: 200
             
         else
-            render json: { errors: ["Invalid email or password"]}, status: :unauthorized
+            render json: { errors: ["Invalid email or password"], status: 400}
         end
 
     end
