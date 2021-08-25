@@ -9,7 +9,7 @@ class User < ApplicationRecord
     validates :email, :password, length: { minimum: 8 }
     validates :email, uniqueness: true
     has_many :favorites
-    has_many :posts, through: :favorites
+    has_many :favorite_posts, through: :favorites, source: :post
 
     def password
       @password ||= Password.new(password_hash)

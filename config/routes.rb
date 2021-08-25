@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post :auth, to: "authentication#create"
       resources :posts, only: [:show, :index]
       resources :users, only: [:create]
+      resources :favorites, only: [:index]
     end
   end
 end
