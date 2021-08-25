@@ -2,7 +2,7 @@ class Api::V1::PostsController < ApiController
     before_action :set_post, except: [:index]
 
     def index
-        @posts = Post.all.includes(:favorites)
+        @posts = Post.all.includes(:favorites, image_attachment: :blob)
         render json: PostSerializer.new(@posts, { params: 
             { user_favorites: serlializer_params } }).serializable_hash.to_json, status: 200
     end

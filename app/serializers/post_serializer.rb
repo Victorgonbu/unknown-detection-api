@@ -3,6 +3,11 @@ class PostSerializer
   attributes :title, :description, :location
   has_many :favorites
 
+  attribute :image do |post|
+    if post.image.attached?
+      post.image.variant(resize_to_limit:  [500, 500]).processed.service_url
+    end
+  end
   attribute :favorite do |post, params|
     
     if params[:user_favorites] 
