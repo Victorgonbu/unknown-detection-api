@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApiController
 
     if user.save
       render json: { name: user.name,
-        email: user.email,
+        email: user.email_name,
         token: JsonWebToken.encode(sub: user.id), status: 200 }, status: 200
     else
       render json: { errors: user.errors.full_messages, status: 400 }

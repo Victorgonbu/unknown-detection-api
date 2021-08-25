@@ -11,6 +11,11 @@ class User < ApplicationRecord
     has_many :favorites
     has_many :favorite_posts, through: :favorites, source: :post
 
+    def email_name
+      email_name = self.email.split("@")
+      email_name.first
+    end
+
     def password
       @password ||= Password.new(password_hash)
     end

@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < ApiController
         
         if user && user.password == params[:user][:password]
             render json: { name: user.name,
-                email: user.email,
+                email: user.email_name,
                 token: JsonWebToken.encode(sub: user.id) }, status: 200
             
         else
