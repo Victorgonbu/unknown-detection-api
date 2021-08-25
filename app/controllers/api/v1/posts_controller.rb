@@ -1,9 +1,8 @@
 class Api::V1::PostsController < ApiController
     before_action :set_post, except: [:index]
-    skip_before_action :authenticate_token!
 
     def index
-        @posts = Post.all
+        @posts = Post.all.includes(:favorites)
         render json: PostSerializer.new(@posts, { params: 
             { user_favorites: serlializer_params } }).serializable_hash.to_json, status: 200
     end
@@ -20,6 +19,8 @@ class Api::V1::PostsController < ApiController
     private
 
     def serlializer_params
+        p 'CURRENT USER'
+        p current_user
         current_user ? current_user.favorite_posts : nil
     end
     
