@@ -8,7 +8,7 @@ class User < ApplicationRecord
     validates :name, length: { in: 6..20 }
     validates :email, :password, length: { minimum: 8 }
     validates :email, uniqueness: true
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :favorite_posts, through: :favorites, source: :post
 
     def email_name

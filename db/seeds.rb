@@ -13,7 +13,7 @@ user = User.new(name: FFaker::Name.first_name, email: FFaker::Internet.email, pa
 if user.save
   10.times do
     post = Post.create(
-      title: FFaker::Name.first_name,
+      title: FFaker::Movie.title,
       description: FFaker::Lorem.paragraph,
       location: FFaker::Address.country,
       user_id: user.id,
