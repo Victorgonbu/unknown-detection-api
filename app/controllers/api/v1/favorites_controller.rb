@@ -3,7 +3,7 @@ class Api::V1::FavoritesController < ApiController
   def index
       @favorite_posts = current_user.favorite_posts
       render json: PostSerializer.new(@favorite_posts, { params: { 
-        user_favorites: current_user.favorite_posts } }).serializable_hash.to_json, status: 200
+        user_favorites: current_user.favorites } }).serializable_hash.to_json, status: 200
   end
 
   def create
@@ -20,7 +20,7 @@ class Api::V1::FavoritesController < ApiController
     if @favorite.destroy
       render json: { message: 'Post deleted from favorites' }, status: 200
     else
-      render json: { errors: ['Unable to delete post from favorites'] }, status: :404
+      render json: { errors: ['Unable to delete post from favorites'] }, status: 404
     end
   end
 

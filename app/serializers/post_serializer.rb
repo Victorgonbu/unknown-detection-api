@@ -13,8 +13,8 @@ class PostSerializer
     
     if params[:user_favorites] 
       favorite_posts = params[:user_favorites]
-      is_favorite = favorite_posts.any? { |f_post| f_post.id == post.id }
-      is_favorite
+      favorite_record = favorite_posts.find { |fav| fav.post_id == post.id }
+      favorite_record
     else
       nil
     end

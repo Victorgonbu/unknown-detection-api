@@ -35,7 +35,7 @@ class Api::V1::PostsController < ApiController
     end
 
     def serlializer_params
-        current_user ? current_user.favorite_posts : nil
+        current_user ? current_user.favorites : nil
     end
     
     def set_post
