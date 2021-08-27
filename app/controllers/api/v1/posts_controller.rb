@@ -9,14 +9,20 @@ class Api::V1::PostsController < ApiController
 
     def show 
         if @post.present?
-            render json: PostSerializer.new(@post, { params: 
-                { user_favorites: serlializer_params } }).serializable_hash.to_json, status: 200 
+            render json: PostSerializer.new(@post, options).serializable_hash.to_json, status: 200 
         else
             render json: {errors: ["Not found"]}, status: 404 
         end
     end
 
     private
+
+    def options 
+      {
+        params: { user_favorites: serlializer_params },
+        include: [:author] 
+      }
+    end
 
     def serlializer_params
         current_user ? current_user.favorite_posts : nil

@@ -2,6 +2,7 @@ class PostSerializer
   include JSONAPI::Serializer
   attributes :title, :description, :location
   has_many :favorites
+  belongs_to :author, id_method_name: :user_id, serializer: UserSerializer
 
   attribute :image do |post|
     if post.image.attached?
