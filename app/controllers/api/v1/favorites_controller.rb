@@ -9,7 +9,7 @@ class Api::V1::FavoritesController < ApiController
   def create
     @favorite = Favorite.new(fav_params);
     if @favorite.save
-      render json: { message: 'Post added to favorites' }, status: 200
+      render json: FavoriteSerializer.new(@favorite).serializable_hash.to_json, status: 200
     else
       render json: { errors: ['Unable to add post to favorites']}, status: :unauthorized
     end
