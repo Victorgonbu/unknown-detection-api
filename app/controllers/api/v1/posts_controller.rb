@@ -19,8 +19,6 @@ class Api::V1::PostsController < ApiController
     private
 
     def serlializer_params
-        p 'CURRENT USER'
-        p current_user
         current_user ? current_user.favorite_posts : nil
     end
     

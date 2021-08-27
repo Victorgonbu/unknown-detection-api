@@ -15,7 +15,7 @@ if user.save
     post = Post.create(
       title: FFaker::Movie.title,
       description: FFaker::Lorem.paragraph,
-      location: FFaker::Address.country,
+      location: FFaker::Address.city,
       user_id: user.id,
     )
     post.image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/example.jpg')), filename: 'detection.jpg')
