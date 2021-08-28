@@ -7,7 +7,7 @@ class Api::V1::FavoritesController < ApiController
   end
 
   def create
-    @favorite = Favorite.new(fav_params);
+    @favorite = Favorite.new(fav_params.merge(user_id: current_user.id));
     if @favorite.save
       render json: FavoriteSerializer.new(@favorite).serializable_hash.to_json, status: 200
     else
@@ -27,6 +27,6 @@ class Api::V1::FavoritesController < ApiController
   private
 
   def fav_params
-    params.require(:favorite).permit(:user_id, :post_id)
+    params.require(:favorite).permit(:post_id)
   end
 end
