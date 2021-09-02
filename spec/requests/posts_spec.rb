@@ -8,7 +8,7 @@ RSpec.describe 'Posts' do
     Post.create(title: 'post', description: 'description', location: 'location', user_id: User.first.id)
   end
   
-  describe '.index' do
+  describe 'GET index' do
     it 'return all posts' do 
       get '/api/v1/posts'
       p Post.all
@@ -29,7 +29,7 @@ RSpec.describe 'Posts' do
     end  
   end
 
-  describe '.show' do
+  describe 'GET show' do
     it 'return post data' do
       post = Post.last
       get "/api/v1/posts/#{post.id}"

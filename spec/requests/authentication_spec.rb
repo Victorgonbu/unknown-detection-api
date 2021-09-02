@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Authentication" do
-  describe '.create' do
+  describe 'POST create' do
     it 'return name, email, authorization token if valid credentials' do
       user_data = { name: 'user_name', email: 'peter2021@hotmail.com', password: 'victorpass', password_confirmation: 'victorpass' }
       user = User.create(user_data);

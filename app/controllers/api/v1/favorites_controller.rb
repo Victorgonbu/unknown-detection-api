@@ -1,14 +1,19 @@
 class Api::V1::FavoritesController < ApiController
 
   def index
+      if !current_user
+        render json: {errors: ['No current user']}, status: 404
+      else
       @favorite_posts = current_user.favorite_posts
       render json: PostSerializer.new(@favorite_posts, { params: { 
         user_favorites: current_user.favorites } }).serializable_hash.to_json, status: 200
+  
+      end
   end
-
   def create
-    @favorite = Favorite.new(fav_params.merge(user_id: current_user.id));
-    if @favorite.save
+
+    if current_user
+      @favorite = Favorite.create(fav_params.merge(user_id: current_user.id));
       render json: FavoriteSerializer.new(@favorite).serializable_hash.to_json, status: 200
     else
       render json: { errors: ['Unable to add post to favorites']}, status: :unauthorized
@@ -16,8 +21,10 @@ class Api::V1::FavoritesController < ApiController
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
-    if @favorite.destroy
+    
+    if current_user
+      @favorite = Favorite.find(params[:id])
+      @favorite.destroy
       render json: { message: 'Post deleted from favorites' }, status: 200
     else
       render json: { errors: ['Unable to delete post from favorites'] }, status: 404
