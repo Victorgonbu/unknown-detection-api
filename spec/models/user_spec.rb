@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User do
+  subject { described_class.create(name: 'victor', email: 'peter@hotmail.com', password: 'password', password_confirmation: 'password') }
   describe 'validations' do
     describe 'name' do
       subject { described_class.new(email: 'peter@hotmail.com', password: 'password', password_confirmation: 'password') }
@@ -79,6 +80,36 @@ RSpec.describe User do
         expect(subject).to be_valid
       end
 
+    end
+  end
+
+  describe 'associations' do
+    it 'has many favorites' do
+      relation = described_class.reflect_on_association(:favorites);
+      expect(relation.macro).to eq :has_many
+    end
+    it 'has many favorite posts' do 
+      relation = described_class.reflect_on_association(:favorite_posts);
+      expect(relation.macro).to eq :has_many
+    end
+  end
+
+  describe '#email_name' do
+    it "returns the first part before '@' from user email" do
+      expect(subject.email_name).to eq 'peter'
+    end 
+  end
+
+  describe '#password' do
+    it 'returns encrypted password using BCrypt' do
+      expect(subject.password.class).to eq BCrypt::Password
+    end
+  end
+
+  describe '#password=' do
+    it 'Assign encrypted password to password_hash record field' do
+      subject.password = 'password'
+      expect(subject.password_hash).to be_truthy
     end
   end
 end

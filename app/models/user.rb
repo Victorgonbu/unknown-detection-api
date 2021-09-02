@@ -1,7 +1,6 @@
 class User < ApplicationRecord
     REGEX = URI::MailTo::EMAIL_REGEXP
     include BCrypt
-    has_many :favorites
     validates :name, :email, :password, :password_confirmation, presence: true
     validates :password, confirmation: true
     validates :email, format: { with: REGEX, message: "Invalid email"}
