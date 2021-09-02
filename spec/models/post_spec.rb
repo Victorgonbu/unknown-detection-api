@@ -1,15 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Post do
+  before(:each) do
+    User.create(name: 'victor', email: 'author3@hotmail.com', password: 'password', password_confirmation: 'password')
+    described_class.create(title: 'post title', description: 'description', location: 'location', user_id: User.last.id)
+  end
+  
   describe 'validations' do
     describe 'title' do
-      User.create(name: 'victor', email: 'author3@hotmail.com', password: 'password', password_confirmation: 'password')
       subject {described_class.new(description: 'description', location: 'location', user_id: User.last.id)}
       it 'must be present' do
         expect(subject).to_not be_valid
         subject.title = 'post title2'
         expect(subject).to be_valid
-        subject.save
       end
 
       it 'must be unique' do
@@ -35,7 +38,7 @@ RSpec.describe Post do
 
   describe '.search' do
     it 'returns ActviveRecord::Relation of posts where title matches query' do
-      expect(described_class.search('title')[0].id).to eq 9;
+      expect(described_class.search('title').size).to eq 1;
 
     end
   end

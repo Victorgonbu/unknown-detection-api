@@ -7,9 +7,11 @@ RSpec.describe 'Posts' do
     Post.create(title: 'title', description: 'description', location: 'location', user_id: User.first.id)
     Post.create(title: 'post', description: 'description', location: 'location', user_id: User.first.id)
   end
+  
   describe '.index' do
     it 'return all posts' do 
       get '/api/v1/posts'
+      p Post.all
       expect(response_json["data"].size).to eq 2
       expect(response_json.to_json).to eq PostSerializer.new(Post.all).serializable_hash.to_json 
     end
@@ -29,8 +31,9 @@ RSpec.describe 'Posts' do
 
   describe '.show' do
     it 'return post data' do
-      get '/api/v1/posts/1'
-      expect(response_json.to_json).to eq PostSerializer.new(Post.first, {include: [:author]}).serializable_hash.to_json
+      post = Post.last
+      get "/api/v1/posts/#{post.id}"
+      expect(response_json.to_json).to eq PostSerializer.new(post, {include: [:author]}).serializable_hash.to_json
     end
   end
 end
