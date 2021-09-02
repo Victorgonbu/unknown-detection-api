@@ -9,7 +9,7 @@ class Api::V1::AuthenticationController < ApiController
                 token: JsonWebToken.encode(sub: user.id) }, status: 200
             
         else
-            render json: { errors: ["Invalid email or password"], status: 400}
+            render json: { errors: ["Invalid email or password"]}, status: 404
         end
 
     end

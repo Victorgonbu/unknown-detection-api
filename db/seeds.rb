@@ -8,16 +8,17 @@
 
 require 'ffaker'
 
-user = User.new(name: FFaker::Name.first_name, email: FFaker::Internet.email, password: 'victor5', password_confirmation: 'victor5');
 
-if user.save
-  10.times do
-    post = Post.create(
-      title: FFaker::Movie.title,
-      description: FFaker::Lorem.paragraph,
-      location: FFaker::Address.city,
-      user_id: user.id,
-    )
-    post.image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/example.jpg')), filename: 'detection.jpg')
-  end
+
+index = 1;
+10.times do
+  user = User.create(name: FFaker::Name.first_name, email: FFaker::Internet.email, password: 'victor5', password_confirmation: 'victor5');
+  post = Post.create(
+    title: FFaker::Movie.title,
+    description: FFaker::Lorem.paragraph,
+    location: FFaker::Address.city,
+    user_id: user.id,
+  )
+  post.image.attach(io: File.open(File.join(Rails.root, "app/assets/images/post_#{index}.jpg")), filename: 'detection.jpg')
+  index += 1
 end
