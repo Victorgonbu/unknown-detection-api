@@ -26,7 +26,11 @@ module UnknownDetection
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:3000', 'https://unknown-detections.netlify.app/' #replace this url with that of your own heroku client app
+        origins 'http://localhost:3000'
+        resource '*', :headers => :any, :methods => [:get, :post, :delete]
+      end
+      allow do
+        origins 'https://unknown-detections.netlify.app/'
         resource '*', :headers => :any, :methods => [:get, :post, :delete]
       end
     end
