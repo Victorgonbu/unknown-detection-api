@@ -1,6 +1,6 @@
 # Unknown Detections API - Microverse final capstone project.
 
-This is unknown detections RoR API witch counts with user(create), posts(index and create), and favorites(index, create and destroy) endpoints. The react client app can be found [here](https://github.com/Shaqri/unknown-detection-client).
+This is unknown detections RoR API which counts with user(create), posts(index and create), and favorites(index, create and destroy) endpoints. The react client app can be found [here](https://github.com/Shaqri/unknown-detection-client).
 
 ## Usage
 
