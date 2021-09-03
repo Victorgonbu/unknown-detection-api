@@ -30,7 +30,7 @@ module UnknownDetection
         resource '*', :headers => :any, :methods => [:get, :post, :delete]
       end
       allow do
-        origins 'https://unknown-detections.netlify.app/'
+        origins 'https://unknown-detections.netlify.app'
         resource '*', :headers => :any, :methods => [:get, :post, :delete]
       end
     end
