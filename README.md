@@ -4,45 +4,45 @@ This is unknown detections RoR API witch counts with user(create), posts(index a
 
 ## Usage
 
-- Authentication:  
+- AUTHENTICATION:  
 
-POST `https://unknow-detections.herokuapp.com/api/v1/users`
+POST `https://unknow-detections.herokuapp.com/api/v1/users`  
 params -> user => name, email, password, password confirmation
 >> Creates a new user in the database and responds with AuthToken, username, and user email.  
 
-POST `https://unknow-detections.herokuapp.com/api/v1/auth`
+POST `https://unknow-detections.herokuapp.com/api/v1/auth`    
 params -> user => email, password  
 >> Checks for user in database and respond with AuthToken, username and user email if found.  
 
-- Posts:    
+- POSTS:    
 
-GET `https://unknow-detections.herokuapp.com/api/v1/posts`
+GET `https://unknow-detections.herokuapp.com/api/v1/posts`  
 optional headers -> Authorization:"Bearer 'AuthToken'"
->> respond with an array containing all created posts.  
+>> Respond with an array containing all created posts.  
 
-GET `https://unknow-detections.herokuapp.com/api/v1/posts?search=:search_query`
+GET `https://unknow-detections.herokuapp.com/api/v1/posts?search=:search_query`  
 URL params -> search_query
->> respond with all posts where its title matches or matches part of the search query.    
+>> Respond with all posts where its title matches or matches part of the search query.    
 
-GET `https://unknow-detections.herokuapp.com/api/v1/posts/:id`
+GET `https://unknow-detections.herokuapp.com/api/v1/posts/:id`  
 URL params -> post_id
->> respond with data of post id passed in url.  
+>> Respond with data of post id passed in url.  
 
-- Favorites
+- FAVORITES
 
-GET `https://unknow-detections.herokuapp.com/api/v1/favorites`
+GET `https://unknow-detections.herokuapp.com/api/v1/favorites`  
 headers -> Authorization:"Bearer 'AuthToken'"
->> respond with an array of all favorite posts of the current user.  
+>> Respond with an array of all favorite posts of the current user.  
 
-POST `https://unknow-detections.herokuapp.com/api/v1/favorites`
+POST `https://unknow-detections.herokuapp.com/api/v1/favorites`  
 headers -> Authorization:"Bearer 'AuthToken'"
 params -> favorite => post_id
->> creates a favorite relationship between post and current user and respond with record id with relationships.  
+>> Creates a favorite relationship between post and current user and respond with record id with relationships.  
 
-DELETE `https://unknow-detections.herokuapp.com/api/v1/favorites/:id`
+DELETE `https://unknow-detections.herokuapp.com/api/v1/favorites/:id`  
 headers -> Authorization:"Bearer 'AuthToken'"
-url params -> favorite_id
->> destroy favorite relationship and respond with successful message.  
+URL params -> favorite_id
+>> Destroy favorite relationship and respond with successful message.  
 ## Built With
 
 - Ruby
