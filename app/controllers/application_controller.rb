@@ -23,8 +23,8 @@ class ApplicationController < ActionController::API
     @auth_token ||= request.headers.fetch('Authorization', '').split.last
   end
 
-  def render_json(record, status_code, options = nil)
-    render json: PostSerializer.new(record, options).serializable_hash.to_json, status: status_code
+  def render_json(serializer, record, status_code, options = {})
+    render json: serializer.new(record, options).serializable_hash.to_json, status: status_code
   end
 
   def render_errors(msgs, status_code)

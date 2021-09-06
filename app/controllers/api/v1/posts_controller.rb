@@ -6,19 +6,19 @@ class Api::V1::PostsController < ApplicationController
       query = params[:search]
       @posts = Post.search(query)
       if @posts.any?
-        render_json(@posts, 200)
+        render_json(PostSerializer ,@posts, 200)
       else
         render_errors(['No matches found'], 404)
       end
     else
       @posts = Post.all_posts
-      render_json(@posts, 200, options)
+      render_json(PostSerializer, @posts, 200, options)
     end
   end
 
   def show
     if @post.present?
-      render_json(@post, 200, options(true))
+      render_json(PostSerializer, @post, 200, options(true))
     else
       render_errors(['Not found'], 404)
     end
