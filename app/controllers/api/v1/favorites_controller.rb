@@ -1,4 +1,4 @@
-class Api::V1::FavoritesController < ApiController
+class Api::V1::FavoritesController < ApplicationController
   def index
     if current_user
       @favorite_posts = current_user.favorite_posts

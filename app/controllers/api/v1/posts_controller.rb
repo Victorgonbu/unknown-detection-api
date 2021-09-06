@@ -1,4 +1,4 @@
-class Api::V1::PostsController < ApiController
+class Api::V1::PostsController < ApplicationController
   before_action :set_post, except: [:index]
 
   def index
