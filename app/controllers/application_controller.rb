@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   before_action :authenticate_token!
 
   private
-  
+
   def set_default_format
     request.format = :json
   end
@@ -21,5 +21,13 @@ class ApplicationController < ActionController::API
 
   def auth_token
     @auth_token ||= request.headers.fetch('Authorization', '').split.last
+  end
+
+  def render_json(record, status_code, options = nil)
+    render json: PostSerializer.new(record, options).serializable_hash.to_json, status: status_code
+  end
+
+  def render_errors(msgs, status_code)
+    render json: {errors: msgs}, status: status_code
   end
 end

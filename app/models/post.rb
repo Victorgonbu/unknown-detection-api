@@ -5,4 +5,5 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
 
   scope :search, ->(query) { where('lower(title) LIKE ?', "%#{query}%") }
+  scope :all_posts, ->() { includes(:favorites, image_attachment: :blob) }
 end
