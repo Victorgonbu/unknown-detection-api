@@ -6,7 +6,7 @@ class Api::V1::AuthenticationController < ApplicationController
     if user && user.password == user_params[:password]
       render_json(UserSerializer, user, 200)
     else
-      render_errors(['Invalid email or password'], 404)
+      render_errors(['Invalid email or password'], 422)
     end
   end
 

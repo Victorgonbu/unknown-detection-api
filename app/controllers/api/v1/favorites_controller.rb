@@ -21,7 +21,7 @@ class Api::V1::FavoritesController < ApplicationController
   private
 
   def authenticate_user!
-    render_errors(['No current user'], 404) if !current_user
+    render_errors(['No current user'], 401) if !current_user
   end
 
   def fav_params

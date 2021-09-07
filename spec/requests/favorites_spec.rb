@@ -17,7 +17,7 @@ RSpec.describe 'Favorites' do
     end
     it 'returns error if no auth token is passed' do
       get '/api/v1/favorites'
-      expect(response.status).to be(404)
+      expect(response.status).to be(401)
       expect(response_json).to eq({ 'errors' => ['No current user'] })
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe 'Favorites' do
     it 'return error if no auth token is passed' do
       post '/api/v1/favorites', params: { favorite: { post_id: @post.id } }
       expect(response.status).to be(401)
-      expect(response_json).to eq({ 'errors' => ['Unable to add post to favorites'] })
+      expect(response_json).to eq({ 'errors' => ['No current user'] })
     end
   end
 
@@ -51,8 +51,8 @@ RSpec.describe 'Favorites' do
     it 'return error message when auth token is not passed' do
       favorite = Favorite.create(user_id: @user.id, post_id: @post.id)
       delete "/api/v1/favorites/#{favorite.id}"
-      expect(response.status).to be(404)
-      expect(response_json).to eq({ 'errors' => ['Unable to delete post from favorites'] })
+      expect(response.status).to be(401)
+      expect(response_json).to eq({ 'errors' => ['No current user'] })
     end
   end
 end
