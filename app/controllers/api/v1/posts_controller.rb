@@ -6,7 +6,7 @@ class Api::V1::PostsController < ApplicationController
       query = params[:search]
       @posts = Post.search(query)
       if @posts.any?
-        render_json(PostSerializer ,@posts, 200)
+        render_json(PostSerializer, @posts, 200)
       else
         render_errors(['No matches found'], 404)
       end
@@ -26,10 +26,10 @@ class Api::V1::PostsController < ApplicationController
 
   private
 
-  def options(include_rel = false)
+  def options(include_a = nil)
     {
       params: { user_favorites: serlializer_params },
-      include: include_rel ? [:author] : nil 
+      include: include_a ? [:author] : nil
     }
   end
 

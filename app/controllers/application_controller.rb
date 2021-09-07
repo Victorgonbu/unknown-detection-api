@@ -28,6 +28,6 @@ class ApplicationController < ActionController::API
   end
 
   def render_errors(msgs, status_code)
-    render json: {errors: msgs}, status: status_code
+    render json: { errors: msgs }, status: status_code
   end
 end

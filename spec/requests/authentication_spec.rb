@@ -7,9 +7,9 @@ RSpec.describe 'Authentication' do
                     password_confirmation: 'victorpass' }
       User.create(user_data)
       post '/api/v1/authentication', params: { user: { email: user_data[:email], password: user_data[:password] } }
-      expect(response_json["data"]["attributes"]).to have_key('name')
-      expect(response_json["data"]["attributes"]).to have_key('token')
-      expect(response_json["data"]["attributes"]).to have_key('email_name')
+      expect(response_json['data']['attributes']).to have_key('name')
+      expect(response_json['data']['attributes']).to have_key('token')
+      expect(response_json['data']['attributes']).to have_key('email_name')
       expect(response.status).to be(200)
     end
 

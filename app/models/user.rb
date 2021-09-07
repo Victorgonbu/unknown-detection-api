@@ -4,8 +4,8 @@ class User < ApplicationRecord
   validates :name, length: { in: 6..20 }, presence: true
   validates :password, confirmation: true, length: { minimum: 8 }, presence: true
   validates :password_confirmation, presence: true
-  validates :email, format: { with: REGEX, message: 'Invalid email' }, 
-  length: { minimum: 8 }, uniqueness: true, presence: true
+  validates :email, format: { with: REGEX, message: 'Invalid email' },
+                    length: { minimum: 8 }, uniqueness: true, presence: true
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
 

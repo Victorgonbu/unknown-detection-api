@@ -10,7 +10,7 @@ POST `https://unknow-detections.herokuapp.com/api/v1/users`
 params -> user => name, email, password, password confirmation
 >> Creates a new user in the database and responds with AuthToken, username, and user email.  
 
-POST `https://unknow-detections.herokuapp.com/api/v1/auth`    
+POST `https://unknow-detections.herokuapp.com/api/v1/authentication`    
 params -> user => email, password  
 >> Checks for user in database and respond with AuthToken, username and user email if found.  
 
@@ -60,7 +60,10 @@ To get a local copy up and running follow these simple example steps.
 - Git clone https://github.com/Shaqri/unknown-detection-api.git
 - Move to the root directory in your command line
 - run `bundle install` to install all dependencies
-- run `rails server to start rails server in localhost
+- run `rails db:create` to create database
+- run `rails db:migrate` to create all project db tables
+- run `rails db:seed` to seed database with some data
+- run `rails server` to start rails server in localhost
 
 ## Test   
 

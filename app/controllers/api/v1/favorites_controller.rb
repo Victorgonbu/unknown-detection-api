@@ -3,8 +3,8 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index
     @favorite_posts = current_user.favorite_posts
-    render_json(PostSerializer, @favorite_posts, 200, 
-      {params: {user_favorites: current_user.favorites}})
+    render_json(PostSerializer, @favorite_posts, 200,
+                { params: { user_favorites: current_user.favorites } })
   end
 
   def create
@@ -21,7 +21,7 @@ class Api::V1::FavoritesController < ApplicationController
   private
 
   def authenticate_user!
-    render_errors(['No current user'], 401) if !current_user
+    render_errors(['No current user'], 401) unless current_user
   end
 
   def fav_params
