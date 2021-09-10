@@ -8,8 +8,12 @@ class Api::V1::FavoritesController < ApplicationController
   end
 
   def create
-    @favorite = current_user.favorites.create(fav_params)
-    render_json(FavoriteSerializer, @favorite, 200)
+    @favorite = current_user.favorites.build(fav_params)
+    if @favorite.save
+      render_json(FavoriteSerializer, @favorite, 200)
+    else
+      render_errors(['Unable to create favorite record'], 422)
+    end
   end
 
   def destroy
