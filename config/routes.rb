@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  namespace :api do
+  namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
-      post :auth, to: "authentication#create"
-      resources :posts
+      resources :authentication, only: [:create]
+      resources :posts, only: [:show, :index]
+      resources :users, only: [:create]
+      resources :favorites, only: [:index, :create, :destroy]
     end
   end
 end

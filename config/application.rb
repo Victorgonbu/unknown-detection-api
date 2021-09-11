@@ -24,6 +24,17 @@ module UnknownDetection
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://localhost:3000'
+        resource '*', :headers => :any, :methods => [:get, :post, :delete]
+      end
+      allow do
+        origins 'https://unknown-detections.netlify.app'
+        resource '*', :headers => :any, :methods => [:get, :post, :delete]
+      end
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

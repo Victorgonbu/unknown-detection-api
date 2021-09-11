@@ -1,19 +1,25 @@
 class User < ApplicationRecord
-    REGEX = URI::MailTo::EMAIL_REGEXP
-    include BCrypt
-    has_many :favorites
-    validates :name, :email, :password, :password_confirmation, presence: true
-    validates :password, confirmation: true
-    validates :email, format: { with: REGEX, message: "Invalid email"}
-    validates :name, :email, :password_confirmation, length: { in: 6..20 }
-    validates :email, uniqueness: true
+  REGEX = URI::MailTo::EMAIL_REGEXP
+  include BCrypt
+  validates :name, length: { in: 6..20 }, presence: true
+  validates :password, confirmation: true, length: { minimum: 8 }, presence: true
+  validates :password_confirmation, presence: true
+  validates :email, format: { with: REGEX, message: 'Invalid email' },
+                    length: { minimum: 8 }, uniqueness: true, presence: true
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
 
-    def password
-      @password ||= Password.new(password_hash)
-    end
+  def email_name
+    email_name = email.split('@')
+    email_name.first
+  end
 
-    def password=(new_password)
-      @password = Password.create(new_password)
-      self.password_hash = @password
-    end
+  def password
+    @password ||= Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
 end

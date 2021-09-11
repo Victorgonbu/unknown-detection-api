@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'ffaker'
+
+
+
+index = 1;
+while index <= 10 do
+  user = User.new(name: FFaker::Name.first_name, email: FFaker::Internet.email, password: 'victor5', password_confirmation: 'victor5');
+  if user.save
+    post = Post.create(
+      title: FFaker::Movie.title,
+      description: FFaker::Lorem.paragraph,
+      location: FFaker::Address.city,
+      user_id: user.id,
+    )
+    post.image.attach(io: File.open(File.join(Rails.root, "app/assets/images/post_#{index}.jpg")), filename: 'detection.jpg')
+    index += 1 if post.image.attached?
+  end
+end
